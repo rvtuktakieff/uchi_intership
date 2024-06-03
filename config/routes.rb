@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :students, only: [:create, :destroy]
 
   resources :schools, only: [] do
+    get 'classes', to: 'school_classes#school_classes'
     resources :classes, only: [] do
       get '/students', to: 'students#class_students'
     end
