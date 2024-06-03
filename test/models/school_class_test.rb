@@ -61,4 +61,23 @@ class SchoolClassTest < ActiveSupport::TestCase
 
     assert_equal school_class.students_count, 0
   end
+
+  # изменение данных students_count при создании студентов
+  test 'should increase students_count when create student with for this class' do
+    assert_difference '@school_class.students_count', 1 do
+      create(:student, class_id: @school_class.id)
+
+      @school_class.reload
+    end
+  end
+
+  test 'shoudl decrease students_count when delete student with id this class' do
+    student = create(:student, class_id: @school_class.id)
+    @school_class.reload
+
+    assert_difference '@school_class.students_count', -1 do
+      student.destroy
+      @school_class.reload
+    end
+  end
 end
