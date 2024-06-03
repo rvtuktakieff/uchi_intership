@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_03_043715) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_073535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "school_classes", force: :cascade do |t|
+    t.integer "number", null: false
+    t.string "letter", null: false
+    t.integer "students_count", default: 0, null: false
+    t.check_constraint "number >= 0", name: "number_check"
+    t.check_constraint "students_count >= 0", name: "students_count_check"
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "first_name", null: false
