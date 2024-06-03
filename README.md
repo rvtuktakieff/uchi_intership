@@ -1,24 +1,6 @@
-# README
+Задание для стажировки Ruby инженера
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://github.com/uchiru/internship-api-schema-task
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+docker compose up - запуск приложения
+docker compose run web bin/rails test - запуск тестов
