@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14.2-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_vol:/var/lib/postgresql/data:cached
+    environment:
+      # что бы работало со всех хостов
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=uchi_intership_production
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    depends_on:
+      db:
+        condition: service_healthy
+    build: .
+    ports: 
+      - 3000:3000
+    environment:
+      - DATABASE_URL=postgres://postgres@db:5432/uchi_intership_production
+      - SECRET_KEY_BASE=cf2dd371bc767924c9db8b391a24e143
+  
+volumes:
+  postgres_vol:

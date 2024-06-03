@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: uchi_intership_production
-  username: uchi_intership
-  password: <%= ENV["UCHI_INTERSHIP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
